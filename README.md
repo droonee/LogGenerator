@@ -59,6 +59,8 @@ receivers:
       from: attributes["log.file.path_resolved"]
       to: resource["log.file.path_resolved"]
     start_at: beginning
+    resource:
+      _sourceCategory: fake/logs
 
 service:
   extensions: [sumologic]
