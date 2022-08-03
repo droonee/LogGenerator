@@ -39,4 +39,31 @@ The random log generator will create data that you can use to learn specific fea
 1. Deploy an AWS Linux EC2 instance in your sandbox account (AWS Linux, Ubuntu, etc.) [AWS EC2 - Get Started](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html)
 2. Install Sumo Logic's OT Distro [Standalone Installation](https://github.com/SumoLogic/sumologic-otel-collector/blob/main/docs/Installation.md#standalone)
 3. Copy/paste the code from "ranloggen.sh" script to a .sh file on the EC2 instance.  Make the script executable on the EC2 instance with `chmod +x ranloggen.sh`
-4. 
+4. Use the following config for the OpenTelemetry collector.  Remember to add an installation token from your personal Sumo Logic account in the config.  Remember the log to collect from won't exist until you run the script.  So we are preparing the right filepath to the "myfakedata.log" log in the OpenTelemetry config.  The filepath will be the same directory as where you put the script on the EC2 instance - use `pwd` to find present working directory and path to where the log will be and then add that filepath to the include section of the filelog receiver in the OpenTelemetry config.
+```
+exporters:
+  sumologic:
+
+extensions:
+  sumologic:
+    install_token: <YOUR INSTALLATION TOKEN>
+
+receivers:
+  filelog:
+    include:
+    - /path/to/file/myfakedata.log
+    include_file_name: false
+    include_file_path_resolved: true
+    operators:
+    - type: move
+      from: attributes["log.file.path_resolved"]
+      to: resource["log.file.path_resolved"]
+    start_at: beginning
+
+service:
+  extensions: [sumologic]
+  pipelines:
+    logs:
+      receivers: [filelog]
+      exporters: [sumologic]
+```
