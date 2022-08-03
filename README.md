@@ -36,4 +36,7 @@ The random log generator will create data that you can use to learn specific fea
 - Provisioning an EC2 instance in your AWS sandbox account
 
 #### Prerequisites
-
+1. Deploy an AWS Linux EC2 instance in your sandbox account (AWS Linux, Ubuntu, etc.) [AWS EC2 - Get Started](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html)
+2. Install Sumo Logic's OT Distro [Standalone Installation](https://github.com/SumoLogic/sumologic-otel-collector/blob/main/docs/Installation.md#standalone)
+3. Copy/paste the code from "ranloggen.sh" script to a .sh file on the EC2 instance.  Make the script executable on the EC2 instance with `chmod +x ranloggen.sh`
+4. 
