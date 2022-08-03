@@ -35,7 +35,7 @@ The random log generator will create data that you can use to learn specific fea
 - Sumo Logic's OpenTelemetry Distro and collector
 - Provisioning an EC2 instance in your AWS sandbox account
 
-## Run the script
+## Run the lab
 #### Prerequisites
 1. Deploy an AWS Linux EC2 instance in your sandbox account (AWS Linux, Ubuntu, etc.) [AWS EC2 - Get Started](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html)
 2. Install Sumo Logic's OT Distro [Standalone Installation](https://github.com/SumoLogic/sumologic-otel-collector/blob/main/docs/Installation.md#standalone)
