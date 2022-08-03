@@ -38,9 +38,8 @@ The random log generator will create data that you can use to learn specific fea
 ## Run the lab
 #### Prerequisites
 1. Deploy an AWS Linux EC2 instance in your sandbox account (AWS Linux, Ubuntu, etc.) [AWS EC2 - Get Started](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html)
-2. Install Sumo Logic's OT Distro [Standalone Installation](https://github.com/SumoLogic/sumologic-otel-collector/blob/main/docs/Installation.md#standalone)
-3. Copy/paste the code from "ranloggen.sh" script to a .sh file on the EC2 instance.  Make the script executable on the EC2 instance with `chmod +x ranloggen.sh`
-4. Use the following config for the OpenTelemetry collector.  Create a `config.yaml` file and paste the code below in.  Remember to add an installation token from your personal Sumo Logic account in the config.  Remember the log to collect from won't exist until you run the script.  So we are preparing the right filepath to the "myfakedata.log" log in the OpenTelemetry config.  The filepath will be the same directory as where you put the script on the EC2 instance - use `pwd` to find present working directory and path to where the log will be and then add that filepath to the include section of the filelog receiver in the OpenTelemetry config.
+2. Install Sumo Logic's OT Distro on the EC2 instance [Standalone Installation](https://github.com/SumoLogic/sumologic-otel-collector/blob/main/docs/Installation.md#standalone)
+3. Use the following config for the OpenTelemetry collector.  Create a `config.yaml` file and paste the config from below in.  Remember to add an installation token from your personal Sumo Logic account in the config.  Remember the log to collect from won't exist until you run the script.  So we are preparing the right filepath to the "myfakedata.log" log in the OpenTelemetry config.  The filepath will be the same directory as where you put the script on the EC2 instance - use `pwd` to find present working directory and path to where the log will be and then add that filepath to the include section of the filelog receiver in the OpenTelemetry config.
 ```
 exporters:
   sumologic:
@@ -68,7 +67,8 @@ service:
       receivers: [filelog]
       exporters: [sumologic]
 ```
-5. Change permissions to the "config.yaml" file with `chmod 640 config.yaml`
+4. Change permissions to the "config.yaml" file with `chmod 640 config.yaml`
+5. Copy/paste the code from "ranloggen.sh" script to a .sh file on the EC2 instance.  Make the script executable on the EC2 instance with `chmod +x ranloggen.sh`
 
 #### Generate data and start collection
 1. Start the script first `./ranloggen.sh &` - the "&" will run the script in the background so you can also run the collector in the same terminal window
